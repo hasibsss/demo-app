@@ -1,0 +1,36 @@
+<div class="p-6 bg-black text-white">
+  <h2 class="text-2xl font-bold mb-6 text-center">Task List</h2>
+
+  <div class="overflow-x-auto bg-black shadow-lg rounded-lg">
+    <table class="min-w-[600px] text-sm text-white w-full">
+      <thead class="bg-gray-800">
+        <tr>
+          <th class="p-4 text-left font-medium text-gray-300">Task</th>
+          <th class="p-4 text-left font-medium text-gray-300">Due Date</th>
+          <th class="p-4 text-left font-medium text-gray-300">Priority</th>
+          <th class="p-4 text-left font-medium text-gray-300">Completed</th>
+          <th class="p-4 text-left font-medium text-gray-300">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks" 
+    [class.bg-gray-700]="task.completed"
+    class="hover:bg-transparent focus:outline-none">
+          <td class="p-4 border-t border-gray-600">{{ task.title }}</td>
+          <td class="p-4 border-t border-gray-600">{{ task.dueDate }}</td>
+          <td class="p-4 border-t border-gray-600">
+            <span [class.text-red-500]="task.priority === 'High'" [class.text-yellow-500]="task.priority === 'Medium'" [class.text-green-500]="task.priority === 'Low'">
+              {{ task.priority }}
+            </span>
+          </td>
+          <td class="p-4 text-center border-t border-gray-600">
+            <input type="checkbox" [checked]="task.completed" (change)="toggleCompletion(task)" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-0" />
+          </td>
+          <td class="p-4 text-center border-t border-gray-600">
+            <button (click)="deleteTask(task)" class="text-red-500">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
